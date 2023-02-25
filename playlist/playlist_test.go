@@ -46,7 +46,7 @@ func TestPlaylist_AddSong_many(t *testing.T) {
 	if !ok {
 		t.Fatal("Couldn't convert NewPlaylist result to a *playlist")
 	}
-	const amount = 1000
+	const amount = 1000000
 	var songs []*songmodule.Song
 	for i := 0; i < amount; i++ {
 		songs = append(songs, songmodule.NewSong(fmt.Sprintf("Test song %v", i), time.Duration(rand.Int63n(int64(time.Hour)))))

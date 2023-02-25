@@ -19,13 +19,16 @@ func (song *Song) define(data *song.Song) {
 
 type playlist struct {
 	currentSong *Song
+	lastSong    *Song
 	timer       Timer
 }
 
 func NewPlaylist() Playlist {
+	singleSong := &Song{}
 	return &playlist{
 		timer:       NewTimer(),
-		currentSong: &Song{},
+		currentSong: singleSong,
+		lastSong:    singleSong,
 	}
 }
 
@@ -44,11 +47,8 @@ func (playlist *playlist) Pause() {
 }
 
 func (playlist *playlist) AddSong(song *song.Song) {
-	lastSong := playlist.currentSong
-	for lastSong.Data != nil {
-		lastSong = lastSong.Next
-	}
-	lastSong.define(song)
+	playlist.lastSong.define(song)
+	playlist.lastSong = playlist.lastSong.Next
 }
 
 func (playlist *playlist) Next() {
