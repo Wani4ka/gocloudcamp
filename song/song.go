@@ -1,6 +1,8 @@
 package song
 
-import "time"
+import (
+	"time"
+)
 
 type Song struct {
 	Name   string
@@ -12,4 +14,8 @@ func NewSong(name string, length time.Duration) *Song {
 		Name:   name,
 		Length: length,
 	}
+}
+
+func (song Song) Equal(another Song) bool {
+	return song.Name == another.Name && song.Length == another.Length
 }
